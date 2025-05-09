@@ -5,7 +5,8 @@ let CONFIG = {
     LICENSE_NUMBER: 'X',
     KEYWORD: 'X',
     CITY: 'Richmond, BC', /* has to match the city name in the dropdown. Case sensitive. */
-    LOCATION: 'Richmond driver licensing' /* has to match the location name in the list. Case sensitive. */
+    LOCATION: 'Richmond driver licensing', /* has to match the location name in the list. Case sensitive. */
+    DAYS: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], /* Remove the days you don't want */
 }
 
 let aborted = false;
@@ -162,7 +163,7 @@ const ICBCSite = {
         yesButton.click();
     },
 
-    pickLocation: async ({CITY, LOCATION}) => {
+    pickLocation: async ({CITY, LOCATION, DAYS}) => {
         const locationInput = await $('input[aria-label="Number"]');
         locationInput.value = CITY;
         locationInput.focus();
@@ -173,6 +174,11 @@ const ICBCSite = {
 
         const locationSpan = await $('span', CITY);
         locationSpan.click()  // select dropdown
+
+        for (const day of DAYS) {
+            const dayOption = await $('.mat-checkbox-label', day);
+            dayOption.click();
+        }
 
         const searchButton = await $('button', 'Search');
         searchButton.click()  // select dropdown
