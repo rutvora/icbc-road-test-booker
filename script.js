@@ -116,15 +116,18 @@ const ICBCSite = {
             const agreementCheckbox = await $('input[type="checkbox"]')
             agreementCheckbox.click();
 
-            const errorMessage = '.error-message';
-            const buttonExistsInNextPage = '.raised-button';
-            let dom;
-            do {
-                dom = await $(`${errorMessage}, ${buttonExistsInNextPage}`);
-                await new Promise(resolve => setTimeout(resolve, 500));
-                const signInButton = await $('button', 'Sign in');
-                signInButton.click();
-            } while (dom.classList.contains(errorMessage))
+            const signInButton = await $('button', 'Sign in');
+            signInButton.click();
+            
+            // const errorMessage = '.error-message';
+            // const buttonExistsInNextPage = '.raised-button';
+            // let dom;
+            // do {
+            //     dom = await $(`${errorMessage}, ${buttonExistsInNextPage}`);
+            //     await new Promise(resolve => setTimeout(resolve, 500));
+            //     const signInButton = await $('button', 'Sign in');
+            //     signInButton.click();
+            // } while (dom.classList.contains(errorMessage))
         } catch (e) {
             if (!aborted) {
                 console.log(`Cannot login. Retrying now... ${e}`);
