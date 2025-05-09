@@ -1,3 +1,5 @@
+SLEEP_TIME = 20 // Seconds
+
 let CONFIG = {
     PREFER_TO_BE_AFTER: new Date("2020-01-01"),
     PREFER_TO_BE_BEFORE: new Date("2024-01-01"),
@@ -273,7 +275,7 @@ const ICBCSite = {
             }
         }
 
-        await ICBCSite.checkDate(appointmentListings); // recursion
+        // await ICBCSite.checkDate(appointmentListings); // recursion
     },
 
     proceedWithBooking: async () => {
@@ -311,7 +313,10 @@ const main = async () => {
     try {
         if (!document.URL.includes('/webdeas-ui/booking')) await ICBCSite.gotoBookingTab();
         await ICBCSite.pickLocation(CONFIG);
-        await ICBCSite.checkDate();
+        while (true) {
+            await ICBCSite.checkDate();
+            await new Promise(resolve => setTimeout(resolve, SLEEP_TIME * 1000));
+        }
     } catch (e) {
         if (!aborted) await restart();
     }
