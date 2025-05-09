@@ -20,7 +20,7 @@ const utils = {
 
         const filterWithText = () => {
             elements = Array.prototype.filter.call(elements, function (element) {
-                return RegExp(text).test(element.textContent);
+                return RegExp(utils.escapeRegex(text)).test(element.textContent);
             });
         };
         text && filterWithText();
@@ -88,6 +88,10 @@ const utils = {
         snd.play();
         var intervalID = setInterval(snd.play, 2200);
         setTimeout(function(){ clearInterval(intervalID); }, 2200 * 2)
+    },
+
+    escapeRegex: (s) => {
+        return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     },
 }
 
