@@ -1,3 +1,5 @@
+// Visit https://onlinebusiness.icbc.com/webdeas-ui/home
+
 SLEEP_TIME = 20 // Seconds
 
 let CONFIG = {
@@ -95,7 +97,7 @@ const utils = {
 
     escapeRegex: (s) => {
         return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    },
+    }
 }
 
 const ICBCSite = {
@@ -265,7 +267,7 @@ const ICBCSite = {
         const haveUpdate = appointmentListings?.length !== previousAppointmentList?.length || appointmentListings.some((date, i) => Date.parse(date) !== Date.parse(previousAppointmentList[i]));
 
         if (haveUpdate) {
-            console.table(appointmentListings);
+            // console.table(appointmentListings);
             const result = CONFIG.PREFER_TO_BE_AFTER < appointmentListings[0] && appointmentListings[0] < CONFIG.PREFER_TO_BE_BEFORE;
             if (result) {
                 utils.beep();
